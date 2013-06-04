@@ -17,7 +17,7 @@ package edu.tallerweb.cuentas;
  * nos cubrió, más el 5% adicional sobre el descubierto otorgado.
  */
 public class CuentaCorriente extends AbstractCuenta{
-		static double COMISION=0.05;
+		private final static double COMISION=0.05;
 		private Double saldoDescubierto;
 		private Double descubiertoTotal;
 	/**

@@ -6,7 +6,7 @@ package edu.tallerweb.cuentas;
  * por extracción de $ 6
  */
 public class CajaAhorros extends AbstractCuenta{
-	static int ADICIONAL=6;
+	private final static int ADICIONAL=6;
 	private int cantidad;
 	public CajaAhorros(){
 		super.setSaldo(new Double("0"));
