@@ -16,15 +16,20 @@ package edu.tallerweb.cuentas;
  * Pasaremos a deberle al banco $ 105 en total: los $ 100 que
  * nos cubrió, más el 5% adicional sobre el descubierto otorgado.
  */
-public class CuentaCorriente {
-
+public class CuentaCorriente extends AbstractCuenta{
+		private Double saldoDescubierto;
+		public CuentaCorriente(){
+			super.setSaldo(new Double("0"));
+			saldoDescubierto=new Double(150);
+		}
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
 	 * para el descubierto.
 	 * @param descubiertoTotal
 	 */
 	public CuentaCorriente(final Double descubiertoTotal) {
-		throw new RuntimeException("No implementado aún");
+		super.setSaldo(new Double(0));
+		this.saldoDescubierto=descubiertoTotal;
 	}
 	
 	/**
@@ -34,9 +39,9 @@ public class CuentaCorriente {
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		this.setSaldo(getSaldo()+monto);
+		System.out.println("Deposito "+monto+" -> El saldo es:"+getSaldo());
 	}
-
 	/**
 	 * Se cobrará el 5% de comisión sobre el monto girado
 	 * en descubierto.
@@ -45,7 +50,20 @@ public class CuentaCorriente {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		if(getSaldo()<monto){
+			Double importeDescubierto=(monto-getSaldo())+((monto-getSaldo())*0.05);
+			if(saldoDescubierto>importeDescubierto){
+				saldoDescubierto-=importeDescubierto;
+				this.setSaldo(new Double(0));
+				}
+			else{
+				System.out.println("Extracci�n Fallida "+monto+" -> El saldo es:"+getSaldo() + " el disponible descubierto es: "+getDescubierto());
+				throw new CuentaBancariaException("La operacion no puede realizarse, el saldo es insuficiente");
+			}
+		}
+		else {
+			setSaldo(getSaldo()-monto);
+		}
 	}
 
 	/**
@@ -53,7 +71,7 @@ public class CuentaCorriente {
 	 * @return el saldo de la cuenta
 	 */
 	public Double getSaldo() {
-		throw new RuntimeException("No implementado aún");
+		return super.getSaldo();
 	}
 	
 	/**
@@ -61,7 +79,7 @@ public class CuentaCorriente {
 	 * @return el descubierto de la cuenta
 	 */
 	public Double getDescubierto() {
-		throw new RuntimeException("No implementado aún");
+		return saldoDescubierto;
 	}
 
 }

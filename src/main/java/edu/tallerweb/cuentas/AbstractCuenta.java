@@ -8,7 +8,7 @@ package edu.tallerweb.cuentas;
  * mentación a los métodos proporcionados.
  */
 public abstract class AbstractCuenta {
-
+	private Double saldo;
 	/**
 	 * Agrega a la cuenta el monto determinado
 	 * @param monto a depositar
@@ -20,5 +20,15 @@ public abstract class AbstractCuenta {
 	 * @param monto a extraer
 	 */
 	public abstract void extraer(final Double monto);
+
+	public Double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+	
+	
 
 }
