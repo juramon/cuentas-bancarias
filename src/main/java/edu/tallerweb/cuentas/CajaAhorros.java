@@ -6,6 +6,7 @@ package edu.tallerweb.cuentas;
  * por extracciÃ³n de $ 6
  */
 public class CajaAhorros extends AbstractCuenta{
+	static int ADICIONAL=6;
 	private int cantidad;
 	public CajaAhorros(){
 		super.setSaldo(new Double("0"));
@@ -36,7 +37,7 @@ public class CajaAhorros extends AbstractCuenta{
 		Double montoActual=monto;
 		cantidad++;
 		if(cantidad>5){
-			montoActual +=6;
+			montoActual +=ADICIONAL;
 		}
 		if (saldoActual<montoActual){
 			System.out.println("CajaAhorros Extracción Fallida "+montoActual+" -> El saldo es:"+getSaldo());

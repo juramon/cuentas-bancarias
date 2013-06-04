@@ -25,7 +25,7 @@ public abstract class AbstractCuenta {
 		return saldo;
 	}
 
-	public void setSaldo(Double saldo) {
+	public void setSaldo(final Double saldo) {
 		this.saldo = saldo;
 	}
 	

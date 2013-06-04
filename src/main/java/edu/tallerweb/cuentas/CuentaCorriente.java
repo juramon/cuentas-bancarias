@@ -17,13 +17,9 @@ package edu.tallerweb.cuentas;
  * nos cubrió, más el 5% adicional sobre el descubierto otorgado.
  */
 public class CuentaCorriente extends AbstractCuenta{
+		static double COMISION=0.05;
 		private Double saldoDescubierto;
 		private Double descubiertoTotal;
-		public CuentaCorriente(){
-			super.setSaldo(new Double("0"));
-			saldoDescubierto=new Double(150);
-			this.descubiertoTotal=new Double (150);
-		}
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
 	 * para el descubierto.
@@ -72,7 +68,7 @@ public class CuentaCorriente extends AbstractCuenta{
 			throw new CuentaBancariaException("CuentaCorriente No se puede extraer un monto negativo");
 		}
 		if(getSaldo()<monto){
-			Double importeDescubierto=(monto-getSaldo())+((monto-getSaldo())*0.05);
+			Double importeDescubierto=(monto-getSaldo())+((monto-getSaldo())*COMISION);
 			if(saldoDescubierto>importeDescubierto){
 				saldoDescubierto-=importeDescubierto;
 				this.setSaldo(new Double(0));
