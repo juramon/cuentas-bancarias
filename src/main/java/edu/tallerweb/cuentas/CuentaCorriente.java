@@ -18,9 +18,11 @@ package edu.tallerweb.cuentas;
  */
 public class CuentaCorriente extends AbstractCuenta{
 		private Double saldoDescubierto;
+		private Double descubiertoTotal;
 		public CuentaCorriente(){
 			super.setSaldo(new Double("0"));
 			saldoDescubierto=new Double(150);
+			this.descubiertoTotal=new Double (150);
 		}
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
@@ -30,8 +32,8 @@ public class CuentaCorriente extends AbstractCuenta{
 	public CuentaCorriente(final Double descubiertoTotal) {
 		super.setSaldo(new Double(0));
 		this.saldoDescubierto=descubiertoTotal;
+		this.descubiertoTotal=descubiertoTotal;
 	}
-	
 	/**
 	 * Todo depósito deberá cubrir primero el descubierto,
 	 * si lo hubiera, y luego contar para el saldo de la
@@ -39,8 +41,21 @@ public class CuentaCorriente extends AbstractCuenta{
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		this.setSaldo(getSaldo()+monto);
-		System.out.println("Deposito "+monto+" -> El saldo es:"+getSaldo());
+		if(getSaldo().intValue()>0){
+			this.setSaldo(getSaldo()+monto);
+		
+		} else {
+			Double depositoDescubierto=descubiertoTotal-saldoDescubierto;
+			if(monto>depositoDescubierto){
+				saldoDescubierto=descubiertoTotal;
+				this.setSaldo(monto-depositoDescubierto);
+			}else{
+				this.setSaldo(new Double (0));
+				saldoDescubierto+=monto;
+			}
+		}
+		
+		System.out.println("CuentaCorriente Deposito "+monto+" -> El saldo es:"+getSaldo() + " el saldo descubierto es:"+ saldoDescubierto);
 	}
 	/**
 	 * Se cobrará el 5% de comisión sobre el monto girado
@@ -50,6 +65,9 @@ public class CuentaCorriente extends AbstractCuenta{
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
+		if(monto<0){
+			throw new CuentaBancariaException("CuentaCorriente No se puede extraer un monto negativo");
+		}
 		if(getSaldo()<monto){
 			Double importeDescubierto=(monto-getSaldo())+((monto-getSaldo())*0.05);
 			if(saldoDescubierto>importeDescubierto){
@@ -57,13 +75,14 @@ public class CuentaCorriente extends AbstractCuenta{
 				this.setSaldo(new Double(0));
 				}
 			else{
-				System.out.println("Extracci�n Fallida "+monto+" -> El saldo es:"+getSaldo() + " el disponible descubierto es: "+getDescubierto());
+				System.out.println("CuentaCorriente Extracci�n Fallida "+monto+" -> El saldo es:"+getSaldo() + " el disponible descubierto es: "+getDescubierto());
 				throw new CuentaBancariaException("La operacion no puede realizarse, el saldo es insuficiente");
 			}
 		}
 		else {
 			setSaldo(getSaldo()-monto);
 		}
+		System.out.println("CuentaCorriente Extracci�n "+monto+" -> El saldo es:"+getSaldo());		
 	}
 
 	/**

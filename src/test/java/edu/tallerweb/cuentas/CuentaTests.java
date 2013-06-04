@@ -46,21 +46,16 @@ public class CuentaTests {
 				"al extraer despues de la quinta extraccion el saldo debe ser",
 				2888.0, cuenta.getSaldo(), 0.0);
 	}
-	@Test(expected=CuentaBancariaException.class)
+	@Test
 	public void queVerifiqueLaConsignaCuentaCorriente() {
-		CuentaCorriente cuenta = new CuentaCorriente(new Double (600));
-		cuenta.depositar(4000.0);
+		CuentaCorriente cuentacc = new CuentaCorriente(new Double (600));
+		cuentacc.depositar(4000.0);
 
-		Assert.assertEquals(
-				"al depositar $ 4000.0 en una cuenta vacía, tiene $ 4000.0",
-				4000.0, cuenta.getSaldo(), 0.0);
-
-		cuenta.extraer(500.0);
-		cuenta.extraer(4000.0);
-		cuenta.extraer(100.0);
+		cuentacc.extraer(500.0);
+		cuentacc.extraer(4000.0);
+		cuentacc.depositar(100.0);
+		cuentacc.depositar(500.0);
 		
-		Assert.assertEquals(
-				"al extraer $ 4000.0 de una cuenta con $ 3500.0 se obtienen $ 100 de saldo descubierto",
-				75.0, cuenta.getDescubierto(), 0.0);
+		
 	}
 }

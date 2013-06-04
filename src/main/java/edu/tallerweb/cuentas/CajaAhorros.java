@@ -17,7 +17,7 @@ public class CajaAhorros extends AbstractCuenta{
 	 */
 	public void depositar(final Double monto) {
 		this.setSaldo(getSaldo()+monto);
-		System.out.println("Deposito "+monto+" -> El saldo es:"+getSaldo());
+		System.out.println("CajaAhorros Deposito "+monto+" -> El saldo es:"+getSaldo());
 	}
 
 	/**
@@ -26,6 +26,9 @@ public class CajaAhorros extends AbstractCuenta{
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
+		if(monto<0){
+			throw new CuentaBancariaException("CajaAhorros No se puede extraer un monto negativo");
+		}
 		Double saldoActual=getSaldo();
 		Double montoActual=monto;
 		cantidad++;
@@ -33,14 +36,14 @@ public class CajaAhorros extends AbstractCuenta{
 			montoActual +=6;
 		}
 		if (saldoActual<montoActual){
-			System.out.println("Extracción Fallida "+montoActual+" -> El saldo es:"+getSaldo());
+			System.out.println("CajaAhorros Extracción Fallida "+montoActual+" -> El saldo es:"+getSaldo());
 			throw new CuentaBancariaException("La operacion no puede realizarse, el saldo es insuficiente");
 		}
 		else {
 			saldoActual -= montoActual;
 			this.setSaldo(saldoActual);
 		}
-		System.out.println("Extracción "+montoActual+" -> El saldo es:"+getSaldo());
+		System.out.println("CajaAhorros Extracción "+montoActual+" -> El saldo es:"+getSaldo());
 		}
 	/**
 	 * Permite saber el saldo de la cuenta
