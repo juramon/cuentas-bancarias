@@ -41,6 +41,9 @@ public class CuentaCorriente extends AbstractCuenta{
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
+		if(monto<0){
+			throw new CuentaBancariaException("CuentaSueldo No se puede depositar un monto negativo");
+		}
 		if(getSaldo().intValue()>0){
 			this.setSaldo(getSaldo()+monto);
 		

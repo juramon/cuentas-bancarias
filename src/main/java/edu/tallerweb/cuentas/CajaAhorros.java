@@ -16,6 +16,9 @@ public class CajaAhorros extends AbstractCuenta{
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
+		if(monto<0){
+			throw new CuentaBancariaException("CuentaSueldo No se puede depositar un monto negativo");
+		}
 		this.setSaldo(getSaldo()+monto);
 		System.out.println("CajaAhorros Deposito "+monto+" -> El saldo es:"+getSaldo());
 	}
