@@ -1,5 +1,4 @@
 package edu.tallerweb.cuentas;
-
 /**
  * Es el tipo de cuenta m√°s simple, ya que se rige por la premisa
  * de que en tanto y en cuanto se tenga tanto o m√°s dinero en
@@ -7,17 +6,16 @@ package edu.tallerweb.cuentas;
  * correctamente.
  */
 public class CuentaSueldo extends AbstractCuenta {
-
 	public CuentaSueldo(){
-		super.setSaldo(new Double("0"));
+	super.setSaldo(new Double("0"));
 	}
 	/**
 	 * No hay reglas adicionales para el dep√≥sito
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		if(monto<0){
-			throw new CuentaBancariaException("CuentaSueldo No se puede depositar un monto negativo");
+	if(monto<0){
+		throw new CuentaBancariaException("CuentaSueldo No se puede depositar un monto negativo");
 		}
 		this.setSaldo(getSaldo()+monto);
 		System.out.println("CuentaSueldo Deposito "+monto+" -> El saldo es:"+getSaldo());
@@ -27,11 +25,11 @@ public class CuentaSueldo extends AbstractCuenta {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		if(monto<0){
-			throw new CuentaBancariaException("CuentaSueldo No se puede extraer un monto negativo");
+	if(monto<0){
+		throw new CuentaBancariaException("CuentaSueldo No se puede extraer un monto negativo");
 		}
 		Double saldoActual=getSaldo();
-		if (saldoActual<monto){
+		if(saldoActual<monto){
 			System.out.println("CuentaSueldo ExtracciÛn Fallida "+monto+" -> El saldo es:"+getSaldo());
 			throw new CuentaBancariaException("La operacion no puede realizarse, el saldo es insuficiente");
 		}
@@ -41,7 +39,6 @@ public class CuentaSueldo extends AbstractCuenta {
 		}
 		System.out.println("CuentaSueldo ExtracciÛn "+monto+" -> El saldo es:"+getSaldo());
 		}
-
 	/**
 	 * Permite saber el saldo de la cuenta
 	 * @return el saldo de la cuenta
@@ -49,5 +46,4 @@ public class CuentaSueldo extends AbstractCuenta {
 	public Double getSaldo() {
 		return super.getSaldo();
 	}
-
 }

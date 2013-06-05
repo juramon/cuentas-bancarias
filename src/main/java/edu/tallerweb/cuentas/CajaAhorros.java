@@ -1,5 +1,4 @@
 package edu.tallerweb.cuentas;
-
 /**
  * Similar a la CuentaSueldo, pero se pide que luego de la
  * quinta extracción de dinero se cobre un costo adicional
@@ -23,7 +22,6 @@ public class CajaAhorros extends AbstractCuenta{
 		this.setSaldo(getSaldo()+monto);
 		System.out.println("CajaAhorros Deposito "+monto+" -> El saldo es:"+getSaldo());
 	}
-
 	/**
 	 * Se cobran $6 adicionales por cada extracción luego de
 	 * la quinta.
@@ -31,7 +29,7 @@ public class CajaAhorros extends AbstractCuenta{
 	 */
 	public void extraer(final Double monto) {
 		if(monto<0){
-			throw new CuentaBancariaException("CajaAhorros No se puede extraer un monto negativo");
+		throw new CuentaBancariaException("CajaAhorros No se puede extraer un monto negativo");
 		}
 		Double saldoActual=getSaldo();
 		Double montoActual=monto;
@@ -39,11 +37,11 @@ public class CajaAhorros extends AbstractCuenta{
 		if(cantidad>5){
 			montoActual +=ADICIONAL;
 		}
-		if (saldoActual<montoActual){
+		if(saldoActual<montoActual){
 			System.out.println("CajaAhorros Extracci�n Fallida "+montoActual+" -> El saldo es:"+getSaldo());
 			throw new CuentaBancariaException("La operacion no puede realizarse, el saldo es insuficiente");
 		}
-		else {
+		else{
 			saldoActual -= montoActual;
 			this.setSaldo(saldoActual);
 		}
@@ -56,5 +54,4 @@ public class CajaAhorros extends AbstractCuenta{
 	public Double getSaldo() {
 		return super.getSaldo();
 	}
-
 }

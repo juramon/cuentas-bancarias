@@ -1,5 +1,4 @@
 package edu.tallerweb.cuentas;
-
 /**
  * La mÃ¡s compleja de las cuentas, Ã©sta permite establecer una
  * cantidad de dinero a girar en descubierto. Es por ello que
@@ -42,7 +41,6 @@ public class CuentaCorriente extends AbstractCuenta{
 		}
 		if(getSaldo().intValue()>0){
 			this.setSaldo(getSaldo()+monto);
-		
 		} else {
 			Double depositoDescubierto=descubiertoTotal-saldoDescubierto;
 			if(monto>depositoDescubierto){
@@ -53,7 +51,6 @@ public class CuentaCorriente extends AbstractCuenta{
 				saldoDescubierto+=monto;
 			}
 		}
-		
 		System.out.println("CuentaCorriente Deposito "+monto+" -> El saldo es:"+getSaldo() + " el saldo descubierto es:"+ saldoDescubierto);
 	}
 	/**
@@ -70,12 +67,12 @@ public class CuentaCorriente extends AbstractCuenta{
 		if(getSaldo()<monto){
 			Double importeDescubierto=(monto-getSaldo())+((monto-getSaldo())*COMISION);
 			if(saldoDescubierto>importeDescubierto){
-				saldoDescubierto-=importeDescubierto;
-				this.setSaldo(new Double(0));
-				}
-			else{
-				System.out.println("CuentaCorriente Extracción Fallida "+monto+" -> El saldo es:"+getSaldo() + " el disponible descubierto es: "+getDescubierto());
-				throw new CuentaBancariaException("La operacion no puede realizarse, el saldo es insuficiente");
+			saldoDescubierto-=importeDescubierto;
+			this.setSaldo(new Double(0));
+		}
+		else{
+			System.out.println("CuentaCorriente Extracción Fallida "+monto+" -> El saldo es:"+getSaldo() + " el disponible descubierto es: "+getDescubierto());
+			throw new CuentaBancariaException("La operacion no puede realizarse, el saldo es insuficiente");
 			}
 		}
 		else {
@@ -83,7 +80,6 @@ public class CuentaCorriente extends AbstractCuenta{
 		}
 		System.out.println("CuentaCorriente Extracción "+monto+" -> El saldo es:"+getSaldo());		
 	}
-
 	/**
 	 * Permite saber el saldo de la cuenta
 	 * @return el saldo de la cuenta
@@ -91,7 +87,6 @@ public class CuentaCorriente extends AbstractCuenta{
 	public Double getSaldo() {
 		return super.getSaldo();
 	}
-	
 	/**
 	 * Permite saber el saldo en descubierto
 	 * @return el descubierto de la cuenta
@@ -99,5 +94,4 @@ public class CuentaCorriente extends AbstractCuenta{
 	public Double getDescubierto() {
 		return saldoDescubierto;
 	}
-
 }
