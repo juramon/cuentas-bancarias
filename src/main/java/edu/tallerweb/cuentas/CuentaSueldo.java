@@ -29,7 +29,7 @@ public class CuentaSueldo extends AbstractCuenta {
 		throw new CuentaBancariaException("CuentaSueldo No se puede extraer un monto negativo");
 		}
 		Double saldoActual = getSaldo();
-		if (saldoActual < monto){
+		if (saldoActual < monto) {
 			System.out.println("CuentaSueldo Extracción Fallida " + monto + " -> El saldo es:" + getSaldo());
 			throw new CuentaBancariaException("La operacion no puede realizarse, el saldo es insuficiente");
 		}

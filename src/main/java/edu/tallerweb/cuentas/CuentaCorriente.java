@@ -15,7 +15,7 @@ package edu.tallerweb.cuentas;
  * Pasaremos a deberle al banco $ 105 en total: los $ 100 que
  * nos cubri√≥, m√°s el 5% adicional sobre el descubierto otorgado.
  */
-public class CuentaCorriente extends AbstractCuenta{
+public class CuentaCorriente extends AbstractCuenta {
 		private final static double COMISION = 0.05;
 		private Double saldoDescubierto;
 		private Double descubiertoTotal;
@@ -39,10 +39,10 @@ public class CuentaCorriente extends AbstractCuenta{
 		if (monto < 0) {
 			throw new CuentaBancariaException("CuentaSueldo No se puede depositar un monto negativo");
 		}
-		if(getSaldo().intValue() > 0) {
+		if (getSaldo().intValue() > 0) {
 			this.setSaldo(getSaldo() + monto);
 		} else {
-			Double depositoDescubierto = descubiertoTotal-saldoDescubierto;
+			Double depositoDescubierto = descubiertoTotal - saldoDescubierto;
 			if (monto > depositoDescubierto) {
 				saldoDescubierto = descubiertoTotal;
 				this.setSaldo(monto - depositoDescubierto);
@@ -61,7 +61,7 @@ public class CuentaCorriente extends AbstractCuenta{
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		if (monto < 0){
+		if (monto < 0) {
 			throw new CuentaBancariaException("CuentaCorriente No se puede extraer un monto negativo");
 		}
 		if (getSaldo() < monto) {
@@ -69,17 +69,16 @@ public class CuentaCorriente extends AbstractCuenta{
 			if (saldoDescubierto > importeDescubierto) {
 			saldoDescubierto -= importeDescubierto;
 			this.setSaldo(new Double(0));
-		}
+			}
 		else{
 			System.out.println("CuentaCorriente ExtracciÛn Fallida " + monto + " -> El saldo es:" + getSaldo() + " el disponible descubierto es: " + getDescubierto());
 			throw new CuentaBancariaException("La operacion no puede realizarse, el saldo es insuficiente");
-			}
+			}  
 		}
 		else {
 			setSaldo(getSaldo() - monto);
 		}
-		System.out.println("CuentaCorriente ExtracciÛn " + monto + " -> El saldo es:" + getSaldo());		
-	}
+		System.out.println("CuentaCorriente ExtracciÛn " + monto + " -> El saldo es:" + getSaldo()); }
 	/**
 	 * Permite saber el saldo de la cuenta
 	 * @return el saldo de la cuenta

@@ -1,4 +1,5 @@
 package edu.tallerweb.cuentas;
+
 /**
  * Similar a la CuentaSueldo, pero se pide que luego de la
  * quinta extracci√≥n de dinero se cobre un costo adicional
@@ -39,7 +40,8 @@ public class CajaAhorros extends AbstractCuenta {
 		}
 		if (saldoActual < montoActual) {
 			System.out.println("CajaAhorros ExtracciÛn Fallida " + montoActual + " -> El saldo es:" + getSaldo());
-			throw new CuentaBancariaException("La operacion no puede realizarse, el saldo es insuficiente");}
+			throw new CuentaBancariaException("La operacion no puede realizarse, el saldo es insuficiente");
+			}
 		else {
 			saldoActual -= montoActual;
 			this.setSaldo(saldoActual);
